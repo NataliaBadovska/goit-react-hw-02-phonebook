@@ -18,16 +18,16 @@ class App extends Component{
 
   verifyingIdentityOfNames = (name) => {
     const { contacts } = this.state; 
+    const normalizedName = name.toLowerCase();
 
     for (const contact of contacts) {
-      console.log(contact)
-      
-      //  if (contact.name.includes(name))
-      //       {
-      //    alert(name + " is already in contacts.");
-      //       }
+        if (contact.name.toLowerCase() === normalizedName)
+            {
+          alert(name + " is already in contacts.");
+          return true;
+             }
     }
-    }
+  }
 
   addContact = ({ name, number }) => {
   const contact = {
@@ -35,18 +35,13 @@ class App extends Component{
       number,
       id: nanoid()
     }  
-  
-     this.verifyingIdentityOfNames(contact.name) ? console.log("співпало") : console.log("не співпало") ;
 
-    // this.verifyingIdentityOfNames(name);
+    this.setState(prevState => ({ contacts: [contact, ...prevState.contacts] }));
+  }
 
-  //   const contact = {
-  //     name,
-  //     number,
-  //     id: nanoid()
-  //   }   
-    
-   this.setState(prevState => ({ contacts: [contact, ...prevState.contacts] }))
+  getVerifiedContact = ({ name, number }) => {
+    !this.verifyingIdentityOfNames(name) && this.addContact({ name, number });
+
   }
 
   filteringByName = (data) => {
@@ -66,7 +61,7 @@ class App extends Component{
      return (
        <>
          <Section title="Phonebook">
-           <Phonebook onSubmit={this.addContact} contacts={contacts} />
+           <Phonebook onSubmit={this.getVerifiedContact} contacts={contacts} />
          </Section >
 
          <Section title="Contacts">

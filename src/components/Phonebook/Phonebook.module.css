@@ -18,7 +18,8 @@
     display: block;
     border-radius: 6px;
     border: 0px;
-    box-shadow: 6px 6px 2px 1px rgba(0, 0, 255, .2);;
+    box-shadow: 6px 6px 2px 1px rgba(0, 0, 255, .2);
+    cursor: pointer;
 }
 
 .form{

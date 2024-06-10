@@ -54,6 +54,10 @@ class App extends Component{
     return contacts.filter((contact) => contact.name.toLowerCase().includes(normalizedFilter));
   }
 
+  deleteContact = (contactId) => {
+    this.setState(prevState => ({contacts: prevState.contacts.filter(contact => contact.id !== contactId )})) 
+  }
+
   render() {
     const { filter, contacts } = this.state;
     const visibleContacts = this.getVisibleContacts();
@@ -66,7 +70,7 @@ class App extends Component{
 
          <Section title="Contacts">
            <Filter filtering={this.filteringByName} filter={filter} />
-           <Contacts options={visibleContacts} />
+           <Contacts options={visibleContacts} deleteContact={this.deleteContact} />
          </Section>
          
        </>

@@ -41,7 +41,7 @@ class Phonebook extends Component{
                     <label id={this.numberInputId} className={css.labelName}>Number</label>
                      <input type="tel" name="number" id={this.numberInputId} value={number} required onChange={this.handleChangeInput} className={css.inputForm}/>
                     
-                    <button className={css.button}>Add contact</button>
+                    <button type="submit" className={css.button}>Add contact</button>
                 </form>
         </>
     )
